@@ -9,7 +9,8 @@ import { useForm } from 'react-hook-form';
 export const CounterForm = () => {
   const t = useTranslations('CounterForm');
   const pathname = usePathname();
-  const locale = pathname.split('/')[1]; // Extract locale from URL
+  const locale = pathname ? pathname.split('/')[1] : 'en'; // fallback locale if null
+     // Extract locale from URL
   
   const form = useForm({
     resolver: zodResolver(CounterValidation),
