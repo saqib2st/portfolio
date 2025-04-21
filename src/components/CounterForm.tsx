@@ -20,17 +20,20 @@ export const CounterForm = () => {
   const router = useRouter();
 
   const handleIncrement = form.handleSubmit(async (data) => {
-    // Use the current locale from the URL
-    await fetch(`/${locale}/api/counter`, {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(data),
-    });
-
-    form.reset();
-    router.refresh();
+    try {
+      await fetch(`/${locale}/api/counter`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      });
+      
+      form.reset();
+      router.refresh();
+    } catch (error) {
+      console.error('Error incrementing counter:', error);
+    }
   });
 
   return (
