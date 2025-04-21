@@ -1,4 +1,4 @@
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 
 export async function PUT(request: Request, { params }: { params: { locale: string } }) {
   try {
@@ -20,10 +20,13 @@ export async function PUT(request: Request, { params }: { params: { locale: stri
   }
 }
 
-export async function GET(_request: Request, { params }: { params: { locale: string } }) {
+export async function GET(
+  request: NextRequest,
+  context: { params: { locale: string } }
+) {
   // Return a dummy counter value
   return NextResponse.json({ 
     value: 0,
-    locale: params.locale
+    locale: context.params.locale
   });
 } 
