@@ -3,11 +3,14 @@
 import { CounterValidation } from '@/validations/CounterValidation';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useTranslations } from 'next-intl';
-import { useRouter } from 'next/navigation';
+import { useRouter, usePathname } from 'next/navigation';
 import { useForm } from 'react-hook-form';
 
 export const CounterForm = () => {
   const t = useTranslations('CounterForm');
+  const pathname = usePathname();
+  const locale = pathname.split('/')[1]; // Extract locale from URL
+  
   const form = useForm({
     resolver: zodResolver(CounterValidation),
     defaultValues: {
@@ -17,7 +20,8 @@ export const CounterForm = () => {
   const router = useRouter();
 
   const handleIncrement = form.handleSubmit(async (data) => {
-    await fetch(`/api/counter`, {
+    // Use the current locale from the URL
+    await fetch(`/${locale}/api/counter`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',

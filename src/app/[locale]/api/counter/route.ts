@@ -1,14 +1,16 @@
 import { NextResponse } from 'next/server';
 
-export async function PUT(request: Request) {
+export async function PUT(request: Request, { params }: { params: { locale: string } }) {
   try {
     const data = await request.json();
     
-    // Redirect to the localized version if this non-localized route is hit
+    // This is a placeholder API that doesn't actually store any data
+    // You would implement actual counter functionality here
+    
     return NextResponse.json({ 
       success: true, 
       increment: data.increment,
-      note: "Using non-localized API route"
+      locale: params.locale
     });
   } catch (error) {
     return NextResponse.json(
@@ -18,10 +20,10 @@ export async function PUT(request: Request) {
   }
 }
 
-export async function GET() {
+export async function GET(_request: Request, { params }: { params: { locale: string } }) {
   // Return a dummy counter value
   return NextResponse.json({ 
     value: 0,
-    note: "Using non-localized API route"
+    locale: params.locale
   });
 } 
