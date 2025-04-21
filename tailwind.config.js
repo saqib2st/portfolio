@@ -3,6 +3,7 @@ export default {
   content: [
     "./pages/**/*.{js,ts,jsx,tsx}",
     "./components/**/*.{js,ts,jsx,tsx}",
+    "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
     extend: {
@@ -13,12 +14,15 @@ export default {
           green: '#00ff00',
           lightGreen: '#33ff33',
           dimGreen: 'rgba(0, 255, 0, 0.3)',
-          glow: 'rgba(0, 255, 0, 0.7)'
+          glow: 'rgba(0, 255, 0, 0.7)',
+          yellow: '#FFFF00',
+          blue: '#0000FF'
         }
       },
       fontFamily: {
-        'mono': ['VT323', 'Courier New', 'monospace'],
-        'terminal': ['Fira Code', 'monospace']
+        'sans': ['var(--font-inter)'],
+        'mono': ['var(--font-vt323)', 'VT323', 'Courier New', 'monospace'],
+        'terminal': ['var(--font-fira-code)', 'Fira Code', 'monospace']
       },
       animation: {
         'scan': 'scan 2s linear infinite',

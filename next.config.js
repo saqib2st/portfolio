@@ -1,8 +1,20 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-  // Support for both /pages and /app directories 
-  // as the project appears to be in transition
+  webpack: (config, { isServer }) => {
+    // Fixes npm packages that depend on `fs` module
+    if (!isServer) {
+      config.resolve.fallback = {
+        ...config.resolve.fallback,
+        fs: false,
+      };
+    }
+    
+    // Fix for OpenTelemetry critical dependency warning
+    config.module.exprContextCritical = false;
+    
+    return config;
+  },
 };
 
 module.exports = nextConfig;

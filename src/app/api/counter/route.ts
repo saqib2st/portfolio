@@ -4,11 +4,9 @@ export async function PUT(request: Request) {
   try {
     const data = await request.json();
     
-    // Redirect to the localized version if this non-localized route is hit
     return NextResponse.json({ 
       success: true, 
-      increment: data.increment,
-      note: "Using non-localized API route"
+      increment: data.increment
     });
   } catch (error) {
     return NextResponse.json(
@@ -21,7 +19,6 @@ export async function PUT(request: Request) {
 export async function GET() {
   // Return a dummy counter value
   return NextResponse.json({ 
-    value: 0,
-    note: "Using non-localized API route"
+    value: 0
   });
-} 
+}
